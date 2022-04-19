@@ -18,16 +18,17 @@ function App() {
   useEffect(() => {
     fetch("/api")
       .then((response) => response.json())
+      .then((data) => console.log(data))
       .then((data) => setDish(data.mealName))
-      .then((data) => setCuisine(data.mealEthnicity))
-      .then((data) => setCategory(data.mealCategory))
-      .then((data) => {
-        setIngredients(data.mealIngredients);
-        const showState = ingredients.slice().fill(false);
-        setIngredientState(showState)
-      })
+      // .then((data) => setCuisine(data.cuisine))
+      // // .then((data) => setCategory(data.mealCategory))
+      // .then((data) => {
+      //   setIngredients(data.mealIngredients);
+      //   const showState = ingredients.slice().fill(false);
+      //   setIngredientState(showState)
+      // })
       .catch((err) => console.log('Error in get', err));
-  })
+  }, [])
 
   const guessFunc = () => {
     if (guess.toLowerCase() === dish.toLowerCase()) {
