@@ -4,17 +4,19 @@ import React from 'react';
 
 export default function TopComponents(props) {
 
-    const { dish, cuisine, category, gameState } = props
+    const { dish, cuisine, category, gameState, cuisineState } = props
     let correctDish;
     let correctCuisine
-    let correctCategory
     let image
 
     if (gameState === "Win") {
         correctDish = dish
         correctCuisine = cuisine
-        correctCategory = category
     }
+
+    // if (cuisineState === "Win") {
+    //     correctCuisine = cuisine
+    // }
 
     return (
         <div className="TopComponents" >
@@ -24,7 +26,6 @@ export default function TopComponents(props) {
             <div className="DishInfo" >
                 Dish: {correctDish}  <br />
                 Cuisine: {correctCuisine} <br />
-                Type: {correctCategory}  <br />
             </div>
         </div>
 

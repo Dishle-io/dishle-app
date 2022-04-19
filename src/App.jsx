@@ -18,15 +18,15 @@ function App() {
   useEffect(() => {
     fetch("/api")
       .then((response) => response.json())
-      .then((data) => console.log(data))
-      .then((data) => setDish(data.mealName))
-      // .then((data) => setCuisine(data.cuisine))
-      // // .then((data) => setCategory(data.mealCategory))
-      // .then((data) => {
-      //   setIngredients(data.mealIngredients);
-      //   const showState = ingredients.slice().fill(false);
-      //   setIngredientState(showState)
-      // })
+      .then((data) => {
+        setDish(data.mealName);
+        setCuisine(data.cuisine);
+        setIngredients(data.mealIngredients);
+        const showState = data.mealIngredients.slice().fill(false, 2);
+        setIngredientState([...showState])
+        // console.log("Showstate", showState)
+        // console.log("IngedState", ingredientState)
+      })
       .catch((err) => console.log('Error in get', err));
   }, [])
 
@@ -36,9 +36,10 @@ function App() {
       console.log('win')
       setGame("Win")
     } else {
-      if (!ingredientState.include(false)) {
+      // console.log("ingredientState2", ingredientState)
+      if (!ingredientState.includes(false)) {
         // lose condition
-        console.log('lost')
+        console.log('lost', dish)
         setGame('Lose')
       }
       const clone = [...ingredientState];
