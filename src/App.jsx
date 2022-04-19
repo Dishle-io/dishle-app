@@ -5,22 +5,15 @@ import IngredientContainer from './Containers/IngredientContainer';
 import TopComponents from './Components/TopComponents';
 
 function App() {
-
-
-  const ingredients = [];
-
   //Our state
-  const [dish, setDish] = useState([])
-  const [cuisine, setCuisine] = useState([])
-  const [category, setCategory] = useState()
-  const [ingredientState, setIngredientState] = useState([]) /
- 
-  const guessFunc = (target) => {
-    console.log(target);
-    const clone = [...ingredientState];
-    clone[clone.indexOf(false)] = true;
-    setIngredientState(clone);
-  }
+  const [dish, setDish] = useState('')
+  const [cuisine, setCuisine] = useState('')
+  const [category, setCategory] = useState('')
+  const [guess, setGuess] = useState('')
+  const [gameState, setGame] = useState('')
+  const [ingredientState, setIngredientState] = useState([])
+  const [ingredients, setIngredients] = useState([])
+
 
   useEffect(() => {
     fetch("/api")
@@ -29,18 +22,35 @@ function App() {
       .then((data) => setCuisine(data.mealEthnicity))
       .then((data) => setCategory(data.mealCategory))
       .then((data) => {
-        ingredients = data.mealIngredients
-        const fakeState = ingredients.slice().fill(false);
-        setIngredientState(fakeState)
+        setIngredients(data.mealIngredients);
+        const showState = ingredients.slice().fill(false);
+        setIngredientState(showState)
       })
       .catch((err) => console.log('Error in get', err));
-  }, [])
+  })
+
+  const guessFunc = () => {
+    if (guess.toLowerCase() === dish.toLowerCase()) {
+      // our win condition
+      console.log('win')
+      setGame("Win")
+    } else {
+      if (!ingredientState.include(false)) {
+        // lose condition
+        console.log('lost')
+        setGame('Lose')
+      }
+      const clone = [...ingredientState];
+      clone[clone.indexOf(false)] = true;
+      setIngredientState(clone);
+    }
+  }
 
   return (
     <div className="App">
-      <TopComponents dish={dish} cuisine={cuisine} category={category} />
+      <TopComponents dish={dish} cuisine={cuisine} category={category} gameState={gameState} />
       <IngredientContainer ingredients={ingredients} show={ingredientState} />
-      <GuessContainer func={guessFunc} />
+      <GuessContainer func={guessFunc} setGuess={setGuess} />
     </div>
   );
 }

@@ -8,7 +8,7 @@ export default function IngredientContainer(props) {
 
   return (
     <div>IngredientContainer
-			{ingredientMap}
-		</div>
+		{ingredientMap}
+	</div>
   )
 }
