@@ -6,7 +6,7 @@ const PORT = 3001;
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const mongoose = require('mongoose');
-const Recipe = require('./DBmodel.js')
+const Recipe = require('./DBModel.js')
 require('dotenv').config();
 
 const MONGO_URI = process.env.MONGO_URI;
@@ -17,21 +17,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
  */
 app.use(express.json());
 
-const url = new URL('/api/json/v1/1/search.php?f=a','https://themealdb.com')
+app.use("/api", (req, res) => res.status(200).json("test"))
 
-fetch(url)
-  .then(response => response.json())
-  .then(responseToString => JSON.stringify(responseToString))
-  .then(responseJSON => fs.writeFile(path.join(__dirname, './database.json'), responseJSON, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('File written successfully');
-    }
-  }))
-  .catch(err => console.log(err))
+const url = new URL('/api/json/v1/1/search.php?f=a', 'https://themealdb.com')
 
-  
+// fetch(url)
+//   .then(response => response.json())
+//   .then(responseToString => JSON.stringify(responseToString))
+//   .then(responseJSON => fs.writeFile(path.join(__dirname, './database.json'), responseJSON, (err) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log('File written successfully');
+//     }
+//   }))
+//   .catch(err => console.log(err))
+
+
 mongoose.connect(MONGO_URI)
   .then(() => console.log('Connected to DB.'))
   .then(() => app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`)))

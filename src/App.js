@@ -4,8 +4,16 @@ import { Counter } from './features/counter/Counter';
 import './App.css';
 
 function App() {
+  function test() {
+    fetch("/api")
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }
+
   return (
+
     <div className="App">
+      <button onClick={test} > Click </button>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Counter />
