@@ -17,14 +17,27 @@ app.use(bodyParser.urlencoded({ extended: false }));
  */
 app.use(express.json());
 
-app.use("/api", (req, res) => res.status(200).json("test"))
+app.use("/api", async (req, res) => {
+  const dbSize = await Recipe.collection.countDocuments()
+  console.log('dbSize', dbSize);
+  let random = randomizer(dbSize);
+  let meal = await Recipe.findOne({mealID: random});
+  console.log('meal:', meal);
+  res.status(200).json(meal)
+});
 
-const url = new URL('/api/json/v1/1/search.php?f=a', 'https://themealdb.com')
+const url = new URL('/api/json/v1/1/search.php?f=b', 'https://themealdb.com')
+
+
+
+function randomizer(limit) {
+  return Math.ceil(Math.random() * limit)
+}
 
 // fetch(url)
 //   .then(response => response.json())
 //   .then(responseToString => JSON.stringify(responseToString))
-//   .then(responseJSON => fs.writeFile(path.join(__dirname, './database.json'), responseJSON, (err) => {
+//   .then(responseJSON => fs.appendFile(path.join(__dirname, './database.json'), responseJSON, (err) => {
 //     if (err) {
 //       console.log(err);
 //     } else {
@@ -32,6 +45,24 @@ const url = new URL('/api/json/v1/1/search.php?f=a', 'https://themealdb.com')
 //     }
 //   }))
 //   .catch(err => console.log(err))
+
+// const obj1 = {
+//   mealID: '5',
+//   mealName: 'Poutine',
+//   cuisine: 'Canadian',
+//   mealInstructions: 'https://www.themealdb.com/meal.php?c=52804',
+//   mealThumbnail: 'https://www.themealdb.com/images/media/meals/uuyrrx1487327597.jpg',
+//   mealIngredients: [ 'Potatoes', 'Beef gravy', 'Cheese curds', 'Vegetable Oil' ],
+// }
+
+
+// Recipe.create([obj1], (err, recipes) => {
+//   if (err) {
+//     console.log(err)
+//   } else {
+//     console.log('recipe added')
+//   }
+// });
 
 
 mongoose.connect(MONGO_URI)
