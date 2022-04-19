@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
+import { TopComponents } from './TopComponents';
 
 function App() {
-  function test() {
+
+  
+  const [dish, setDish] = useState([])
+  const [cuisine, setCuisine] = useState([])
+
+  useEffect(() => {
     fetch("/api")
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }
+      .then((response) => response.json()) 
+      .then((data) => setDish(data.dish))
+      .then((data) => setCuisine(data.cuisine));
+  }, [])
+
+
 
   return (
 
@@ -16,6 +25,7 @@ function App() {
       <button onClick={test} > Click </button>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <TopComponents />
         <Counter />
         <p>
           Edit <code>src/App.js</code> and save to reload.
