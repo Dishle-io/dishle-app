@@ -5,20 +5,24 @@ import './App.css';
 import { TopComponents } from './TopComponents';
 
 function App() {
+
   
   const [dish, setDish] = useState([])
   const [cuisine, setCuisine] = useState([])
 
   useEffect(() => {
-    fetch("/get")
+    fetch("/api")
       .then((response) => response.json()) 
       .then((data) => setDish(data.dish))
       .then((data) => setCuisine(data.cuisine));
   }, [])
 
 
+
   return (
+
     <div className="App">
+      <button onClick={test} > Click </button>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <TopComponents />
