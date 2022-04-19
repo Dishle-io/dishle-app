@@ -30,10 +30,36 @@
   0% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(10px);
   }
+
   100% {
     transform: translateY(0px);
   }
+}
+
+.TopComponents {
+  display: flex;
+  flex-direction: row;
+  gap: 60px
+}
+
+.DishImage {
+  margin: 10px;
+  background-color: rgba(250, 231, 184, 0.788);
+  border: 1px solid rgb(0, 0, 0, 0.3);
+  /* box-shadow: 10px 10px 8px #bbb; */
+  border-radius: 2px;
+  padding: 20px;
+}
+
+.DishInfo {
+  margin: 10px;
+  background-color: rgba(250, 231, 184, 0.788);
+  border: 1px solid rgb(0, 0, 0, 0.3);
+  /* box-shadow: 10px 10px 8px #bbb; */
+  border-radius: 2px;
+  padding: 20px
 }
