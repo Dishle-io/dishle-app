@@ -3,7 +3,7 @@ import './App.css';
 import GuessContainer from './Containers/GuessContainer';
 import IngredientContainer from './Containers/IngredientContainer';
 import TopComponents from './Components/TopComponents';
-
+import backgroundImage from './images/cooking.jpg'
 
 function App() {
   //Our state
@@ -16,6 +16,9 @@ function App() {
   const [ingredients, setIngredients] = useState([])
   const [cuisineWinState,setWinCuisine] = useState('')
   const [dishThumbnail,setDishThumbnail] = useState('');
+  const [counter, setCounter] = useState(0);
+  const [blurRadius,setBlurRadius] = useState(64);
+
 
   useEffect(() => {
     fetch("/api")
@@ -45,13 +48,23 @@ function App() {
         setGame('Lose')
       }
       checkCuisine(guess)
+      blur()
       const clone = [...ingredientState];
       clone[clone.indexOf(false)] = true;
       setIngredientState(clone);
     }
   }
+  const blur =  () => {
+    if (blurRadius === 64) {
+      setBlurRadius(64 - (3*(64/ingredients.length)))
+    } else {
+      const newRadius = blurRadius - (64/ingredients.length)
+      setBlurRadius(newRadius)
+    }
+  }
 
   function checkCuisine (guess) {
+    guess = guess.toUpperCase();
     const getOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -61,16 +74,19 @@ function App() {
     fetch("/api/cuisine", getOptions)
       .then((response) => response.json())
       .then((data) => {
-        if (data === cuisine) setWinCuisine("Win")
+        if (data.cuisine === cuisine) setWinCuisine("Win")
       })
       .catch((err) => console.log('error in check cuisine', err))
   }
 
   return (
+    <div className ='background' style={{backgroundImage: `url(${backgroundImage}`}}>
     <div className="App">
-      <TopComponents dish={dish} cuisine={cuisine} category={category} gameState={gameState} cuisineWinState={cuisineWinState} image={dishThumbnail}/>
+      <div className='title'> Dishle </div>
+      <TopComponents dish={dish} cuisine={cuisine} category={category} gameState={gameState} cuisineWinState={cuisineWinState} image={dishThumbnail} blurRadius = {blurRadius}/>
       <IngredientContainer ingredients={ingredients} show={ingredientState} />
-      <GuessContainer func={guessFunc} setGuess={setGuess} />
+      <GuessContainer gameState={gameState} func={guessFunc} setGuess={setGuess} />
+    </div>
     </div>
   );
 }

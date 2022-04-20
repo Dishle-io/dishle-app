@@ -2,6 +2,9 @@
 
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .App-logo {
@@ -42,26 +45,48 @@
   }
 }
 
+.background {
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
 .TopComponents {
   display: flex;
   flex-direction: row;
-  gap: 60px
+  gap: 60px;
+  /* min-height: 1000px;
+  min-width: 1000px; */
 }
 
-.DishImage {
-  margin: 10px;
-  background-color: rgba(250, 231, 184, 0.788);
-  border: 1px solid rgb(0, 0, 0, 0.3);
-  /* box-shadow: 10px 10px 8px #bbb; */
-  border-radius: 2px;
-  padding: 20px;
-}
 
 .DishInfo {
-  margin: 10px;
+  margin: auto;
   background-color: rgba(250, 231, 184, 0.788);
   border: 1px solid rgb(0, 0, 0, 0.3);
-  /* box-shadow: 10px 10px 8px #bbb; */
+  box-shadow: 10px 10px 8px #bbb;
   border-radius: 2px;
-  padding: 20px
+  padding: 10px;
+  height: auto;
+  width: auto;
+  font-size: 25px;
+}
+
+#guess {
+  height: 2rem;
+  width: 16rem;
+  text-align: center;
+}
+
+.ingredients {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-family: "Bowlby One"; 
+  font-size: 49px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 700; 
+  line-height: 196px; 
 }

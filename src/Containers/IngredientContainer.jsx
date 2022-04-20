@@ -6,6 +6,7 @@ const style = {
   width: '100%',
   maxWidth: 360,
   bgcolor: 'background.paper',
+  border: 2
 };
 export default function IngredientContainer(props) {
 	const { ingredients } = props;
@@ -14,12 +15,8 @@ export default function IngredientContainer(props) {
 	const ingredientMap2 = ingredients.map((ingredient, index) => <ListItem button divider > <Ingredient isReveal={show[index]} name={ingredient}> </Ingredient> </ListItem>)
 
   return (
-    <>
-		{/* <div className="mdc-card">IngredientContainer
-		{ingredientMap}
-	</div> */}
-
-	<List sx={style} component="nav" aria-label="mailbox folders"> {ingredientMap2} </List>
-	</>
+    <div className='ingredients'>
+		<List sx={style} component="nav" aria-label="mailbox folders"> {ingredientMap2} </List>
+	</div>
   )
 }

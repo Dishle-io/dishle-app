@@ -20,10 +20,11 @@ app.use(express.json());
 
 app.use("/api/cuisine", async (req, res) => {
   const {guess} = req.body
-  console.log('guess', guess)
+  console.log(guess);
+  // console.log('guess', guess)
   const recipe = await Recipe.findOne({mealName: guess})
-  console.log("recipetest", recipe)
-  res.status(200).json(recipe.cuisine) 
+  // console.log("recipetest", recipe)
+  res.status(200).json(recipe) 
 });
 
 app.use("/api", async (req, res) => {
