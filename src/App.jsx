@@ -64,6 +64,8 @@ function App() {
   }
 
   function checkCuisine (guess) {
+    const inputGuess = document.getElementById('guess')
+    inputGuess.value = '';
     guess = guess.toUpperCase();
     const getOptions = {
       method: "POST",

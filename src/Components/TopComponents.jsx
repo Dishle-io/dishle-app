@@ -13,10 +13,17 @@ export default function TopComponents(props) {
 
     if (gameState === "Win") {
         correctDish = dish
-        correctCuisine = cuisine
+        correctCuisine = cuisine.toUpperCase()
         winner = "WINNER!"
     }
 
+    
+    if (gameState === "Lose") {
+        correctDish = dish
+        correctCuisine = cuisine.toUpperCase()
+        winner = "LOSER!"
+    }
+    
     if (cuisineWinState === "Win") {
         correctCuisine = cuisine
     }

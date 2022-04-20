@@ -16,8 +16,12 @@ export default function GuessContainer(props) {
   } else {
     return (
       <div>
-        <input id='guess' autoComplete="off" splaceholder='Your guess' onChange={(e) => setGuess(e.target.value)}></input>
-        <Button variant="contained" color="success" onClick={func}>Guess</Button>
+        <input id='guess' autoComplete="off" placeholder='Your guess' onChange={(e) => setGuess(e.target.value)} onKeyPress = {event => {
+          if (event.key === 'Enter') {
+            func()
+          }
+        }}></input>
+        <Button variant="contained" color="success" onClick={func} >Guess</Button>
       </div>
     )
   }

@@ -4,7 +4,8 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  min-height: 1000px;
 }
 
 .App-logo {
@@ -88,5 +89,6 @@
   font-style: normal; 
   font-variant: normal; 
   font-weight: 700; 
-  line-height: 196px; 
+  line-height: 100px; 
+  color: white;
 }
