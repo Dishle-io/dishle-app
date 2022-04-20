@@ -4,24 +4,23 @@ import React from 'react';
 
 export default function TopComponents(props) {
 
-    const { dish, cuisine, category, gameState, cuisineState } = props
+    const { dish, cuisine, gameState, cuisineWinState, image } = props
     let correctDish;
-    let correctCuisine
-    let image
+    let correctCuisine;
 
     if (gameState === "Win") {
         correctDish = dish
         correctCuisine = cuisine
     }
 
-    // if (cuisineState === "Win") {
-    //     correctCuisine = cuisine
-    // }
+    if (cuisineWinState === "Win") {
+        correctCuisine = cuisine
+    }
 
     return (
         <div className="TopComponents" >
             <div className="DishImage" >
-                <image> {image} </image>
+                <img style={{ width:'25%', height: 'auto'}} src={image}></img>
             </div>
             <div className="DishInfo" >
                 Dish: {correctDish}  <br />

@@ -17,14 +17,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
  */
 app.use(express.json());
 
+
+app.use("/api/cuisine", async (req, res) => {
+  const {guess} = req.body
+  console.log('guess', guess)
+  const recipe = await Recipe.findOne({mealName: guess})
+  console.log("recipetest", recipe)
+  res.status(200).json(recipe.cuisine) 
+});
+
 app.use("/api", async (req, res) => {
   const dbSize = await Recipe.collection.countDocuments()
-  console.log('dbSize', dbSize);
+  // console.log('dbSize', dbSize);
   let random = randomizer(dbSize);
   let meal = await Recipe.findOne({mealID: random});
-  console.log('meal:', meal);
+  // console.log('meal:', meal);
   res.status(200).json(meal)
 });
+
+
 
 const url = new URL('/api/json/v1/1/search.php?f=b', 'https://themealdb.com')
 
@@ -48,11 +59,11 @@ function randomizer(limit) {
 
 // const obj1 = {
 //   mealID: '5',
-//   mealName: 'Poutine',
-//   cuisine: 'Canadian',
-//   mealInstructions: 'https://www.themealdb.com/meal.php?c=52804',
-//   mealThumbnail: 'https://www.themealdb.com/images/media/meals/uuyrrx1487327597.jpg',
-//   mealIngredients: [ 'Potatoes', 'Beef gravy', 'Cheese curds', 'Vegetable Oil' ],
+//   mealName: 'Pumpkin Pie',
+//   cuisine: 'American',
+//   mealInstructions: 'https://www.themealdb.com/meal.php?c=52857',
+//   mealThumbnail: 'https://www.themealdb.com/images/media/meals/usuqtp1511385394.jpg',
+//   mealIngredients: [ 'Pumpkin', 'Shortcrust Pastry', 'Flour', 'Sugar', 'Salt', 'Nutmeg', 'Cinnamon', 'Eggs', 'Butter', 'Milk' ],
 // }
 
 

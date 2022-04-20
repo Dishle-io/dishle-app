@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '@mui/material/Button';
 
 export default function GuessContainer(props) {
   const { func, setGuess } = props
@@ -6,7 +7,7 @@ export default function GuessContainer(props) {
   return (
     <div>GuessContainer
       <input id='guess' placeholder='Your guess' onChange={(e) => setGuess(e.target.value)}></input>
-      <button onClick={func}>Guess</button>
+      <Button variant="contained" onClick={func}>Guess</Button>
     </div>
   )
 }
