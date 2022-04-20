@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { ListItemText } from '@mui/material'
 export default function Ingredient(props) {
   const { name } = props;
@@ -9,7 +9,7 @@ export default function Ingredient(props) {
   //   bgcolor: 'grey',
   //   padding: 2
   // };
-  
+
 
   return (
     <ListItemText variant='outlined' primary={(isReveal ? name : "???")}></ListItemText>
